@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  </head>
+  <body>
+    <header>
+      <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
+    </header>
+    <main>
+      {{ content }}
+    </main>
+    <footer>
+      <!-- Your custom YouTube link -->
+      <a href="https://youtube.com/channel/UC2JTzygrQ0eto9WTjWYB2gQ?si=emq4kC1f3od2Y6ki" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/youtube.svg" alt="YouTube" width="24" style="vertical-align:middle;"/> My YouTube Channel
+      </a>
+    </footer>
+  </body>
+</html>
