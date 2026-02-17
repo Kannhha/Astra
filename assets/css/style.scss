@@ -1,9 +1,206 @@
----
----
+// ============================================
+// SCSS VARIABLES - Define all colors and sizes once here
+// ============================================
+
+// Color palette - Change these to update your entire site's colors
+$primary-color: #0969da;        // Main brand color (GitHub blue)
+$dark-bg: #0d1117;              // Background color
+$light-text: #c9d1d9;           // Default text color
+$accent-color: #58a6ff;         // Accent/hover color
+$success-color: #3fb950;        // Success green
+$danger-color: #f85149;         // Error red
+$border-color: #30363d;         // Border color
+
+// Spacing scale - Use these for consistent spacing throughout
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Typography
+$base-font-size: 16px;
+$heading-font-size: 24px;
+$small-font-size: 14px;
+
+// Transitions for smooth effects
+$transition-speed: 0.3s;
+
+
+// ============================================
+// SCSS MIXINS - Reusable style templates
+// ============================================
+
+// Mixin for smooth transitions (hover effects, animations)
+@mixin smooth-transition($property: all) {
+  transition: $property $transition-speed ease-in-out;
+}
+
+// Mixin for flex centering (useful for buttons, icons, etc)
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Mixin for consistent button styling
+@mixin button-style {
+  @include smooth-transition;
+  padding: $spacing-sm $spacing-md;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Mixin for consistent link styling
+@mixin link-style {
+  color: $accent-color;
+  text-decoration: none;
+  @include smooth-transition;
+  
+  &:hover {
+    color: lighten($accent-color, 10%);
+    text-decoration: underline;
+  }
+}
+
+// Mixin for focus states (accessibility)
+@mixin focus-state {
+  outline: 2px solid $accent-color;
+  outline-offset: 2px;
+}
+
+
+// ============================================
+// IMPORT THE JEKYLL THEME
+// ============================================
 
 @import "{{ site.theme }}";
 
-/* Hide the View on Github button */
+
+// ============================================
+// CUSTOM STYLING - Your personal modifications
+// ============================================
+
+// Hide the GitHub View button - clean up the interface
 .btn {
   display: none !important;
+}
+
+// Improve link styling throughout the site
+a {
+  @include link-style;
+  
+  // Special styling for code blocks
+  code {
+    background-color: rgba(110, 118, 129, 0.4);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 3px;
+  }
+}
+
+// Make headings more prominent and styled
+h1, h2, h3, h4, h5, h6 {
+  color: $accent-color;
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  @include smooth-transition;
+  
+  &:hover {
+    color: lighten($accent-color, 15%);
+  }
+}
+
+// Style the main content area
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  background-color: $dark-bg;
+  color: $light-text;
+}
+
+// Improve list styling
+ul, ol {
+  margin-left: $spacing-lg;
+  margin-bottom: $spacing-md;
+  
+  li {
+    margin-bottom: $spacing-sm;
+    line-height: 1.6;
+  }
+}
+
+// Style code blocks for better readability
+code {
+  background-color: rgba(110, 118, 129, 0.4);
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 3px;
+  font-size: $small-font-size;
+  color: $success-color;
+}
+
+// Style blockquotes nicely
+blockquote {
+  border-left: 4px solid $accent-color;
+  margin-left: 0;
+  padding-left: $spacing-md;
+  color: lighten($light-text, 10%);
+  font-style: italic;
+  margin-bottom: $spacing-md;
+}
+
+// Improve table styling if you use tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $spacing-lg;
+  
+  th, td {
+    padding: $spacing-md;
+    border-bottom: 1px solid $border-color;
+    text-align: left;
+  }
+  
+  th {
+    background-color: rgba(88, 166, 255, 0.1);
+    color: $accent-color;
+    font-weight: 600;
+  }
+  
+  tr:hover {
+    background-color: rgba(88, 166, 255, 0.05);
+  }
+}
+
+// Style horizontal rules (the --- separators)
+hr {
+  border: none;
+  border-top: 2px solid $border-color;
+  margin: $spacing-xl 0;
+}
+
+// Add subtle shadows and styling to containers
+.container {
+  background-color: rgba(13, 17, 23, 0.5);
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+  @include smooth-transition;
+  
+  &:hover {
+    border-color: $accent-color;
+    background-color: rgba(13, 17, 23, 0.8);
+  }
 }
