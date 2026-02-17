@@ -38,3 +38,8 @@
 @keyframes blink {
   50% { border-color: transparent; }
 }
+
+/* Hide the View on Github button */
+.btn {
+  display: none !important;
+}
