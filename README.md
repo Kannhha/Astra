@@ -1,6 +1,3 @@
----
----
-
 # 👋 Hi, I'm Kannhha
 
 Welcome to my digital space where I will share my projects, ideas, and journey in technology.
@@ -12,13 +9,13 @@ Welcome to my digital space where I will share my projects, ideas, and journey i
 I'm a passionate developer who loves coding and solving problems through creative solutions. I'm always learning and growing, focused on mastering the craft of coding. Beyond development, I have a deep love for space and science, I create gaming content on YouTube, and I express my creativity through drawing. I believe in continuous learning and exploring the cosmos while building amazing things with code.
 
 ### What I Do
-🥷🏼 Developer who loves coding and solving problems
-🗿 Always learning and growing
-📟 Focused on mastering the craft of coding
-🚀 Passionate about space and science
-🦥 Content creator sharing gaming videos on YouTube
-🖼️ Artist who loves to draw and express creativity
-🌌 A fellow Andromedian exploring peasants technology
+- 🥷🏼 Developer who loves coding and solving problems
+- 🗿 Always learning and growing
+- 📟 Focused on mastering the craft of coding
+- 🚀 Passionate about space and science
+- 🦥 Content creator sharing gaming videos on YouTube
+- 🖼️ Artist who loves to draw and express creativity
+- 🌌 A fellow Andromedian exploring peasants technology
 
 ### My Journey
 
@@ -30,7 +27,7 @@ I started my coding journey with curiosity and determination. Every project I wo
 
 I create gaming content and share my gaming experiences on YouTube. Feel free to check out my channel and subscribe if you enjoy gaming videos!
 
-**YouTube**: (https://youtube.com/channel/UC2JTzygrQ0eto9WTjWYB2gQ?si=AcYpm5ubG4Zvqi7H)
+**YouTube**: [My Channel](https://youtube.com/channel/UC2JTzygrQ0eto9WTjWYB2gQ?si=AcYpm5ubG4Zvqi7H)
 
 ---
 
@@ -56,4 +53,4 @@ I'm actively learning and working with:
 
 ---
 
-##  Made with 🧠
+##  Made with 🧠 ## 
