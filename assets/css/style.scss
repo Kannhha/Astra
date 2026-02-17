@@ -2,19 +2,22 @@
 ---
 
 // ============================================
-// SCSS VARIABLES - Define all colors and sizes once here
+// SCSS VARIABLES - Hacker Terminal Theme
 // ============================================
 
-// Color palette - Change these to update your entire site's colors
-$primary-color: #0969da;        // Main brand color (GitHub blue)
-$dark-bg: #0d1117;              // Background color
-$light-text: #c9d1d9;           // Default text color
-$accent-color: #58a6ff;         // Accent/hover color
-$success-color: #3fb950;        // Success green
-$danger-color: #f85149;         // Error red
-$border-color: #30363d;         // Border color
+// Neon color palette - vibrant colors for that hacker aesthetic
+$neon-cyan: #00ffff;            // Bright cyan - main accent
+$neon-green: #00ff00;           // Bright green - secondary accent
+$neon-pink: #ff00ff;            // Magenta/Pink - highlights
+$neon-yellow: #ffff00;          // Yellow - alerts
+$neon-blue: #0088ff;            // Electric blue
 
-// Spacing scale - Use these for consistent spacing throughout
+$dark-bg: #0a0e27;              // Very dark blue/black background
+$darker-bg: #050811;            // Even darker for contrast
+$light-text: #e0e0e0;           // Light gray text
+$border-color: #1a1f3a;         // Subtle dark border
+
+// Spacing scale
 $spacing-xs: 4px;
 $spacing-sm: 8px;
 $spacing-md: 16px;
@@ -25,62 +28,49 @@ $spacing-xl: 32px;
 $base-font-size: 16px;
 $heading-font-size: 24px;
 $small-font-size: 14px;
+$mono-font: 'Courier New', monospace;
 
-// Transitions for smooth effects
+// Effects
 $transition-speed: 0.3s;
+$glow-blur: 10px;
 
 
 // ============================================
-// SCSS MIXINS - Reusable style templates
+// SCSS MIXINS - Terminal Effects
 // ============================================
 
-// Mixin for smooth transitions (hover effects, animations)
-@mixin smooth-transition($property: all) {
-  transition: $property $transition-speed ease-in-out;
+// Neon glow effect
+@mixin neon-glow($color) {
+  color: $color;
+  text-shadow: 0 0 5px $color, 0 0 10px $color, 0 0 20px $color;
 }
 
-// Mixin for flex centering (useful for buttons, icons, etc)
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// Subtle glow for backgrounds
+@mixin subtle-glow($color) {
+  box-shadow: 0 0 15px rgba($color, 0.3), inset 0 0 15px rgba($color, 0.05);
 }
 
-// Mixin for consistent button styling
-@mixin button-style {
+// Smooth transition for all properties
+@mixin smooth-transition {
+  transition: all $transition-speed ease-in-out;
+}
+
+// Terminal border effect
+@mixin terminal-border($color) {
+  border: 2px solid $color;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba($color, 0.3);
+}
+
+// Hover glow effect
+@mixin hover-glow($color) {
   @include smooth-transition;
-  padding: $spacing-sm $spacing-md;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
   
   &:hover {
+    @include neon-glow($color);
+    @include subtle-glow($color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
-  
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-// Mixin for consistent link styling
-@mixin link-style {
-  color: $accent-color;
-  text-decoration: none;
-  @include smooth-transition;
-  
-  &:hover {
-    color: lighten($accent-color, 10%);
-    text-decoration: underline;
-  }
-}
-
-// Mixin for focus states (accessibility)
-@mixin focus-state {
-  outline: 2px solid $accent-color;
-  outline-offset: 2px;
 }
 
 
@@ -92,82 +82,166 @@ $transition-speed: 0.3s;
 
 
 // ============================================
-// CUSTOM STYLING - Your personal modifications
+// GLOBAL STYLING - Dark Terminal Background
 // ============================================
 
-// Hide the GitHub View button - clean up the interface
+// Make the entire page dark terminal style
+body {
+  background-color: $dark-bg !important;
+  color: $light-text;
+  font-family: $mono-font;
+}
+
+// Set page background
+html {
+  background-color: $darker-bg !important;
+}
+
+
+// ============================================
+// CUSTOM STYLING - Hacker Terminal Aesthetic
+// ============================================
+
+// Hide the GitHub View button
 .btn {
   display: none !important;
 }
 
-// Improve link styling throughout the site
-a {
-  @include link-style;
-  
-  // Special styling for code blocks
-  code {
-    background-color: rgba(110, 118, 129, 0.4);
-    padding: $spacing-xs $spacing-sm;
-    border-radius: 3px;
-  }
-}
-
-// Make headings more prominent and styled
-h1, h2, h3, h4, h5, h6 {
-  color: $accent-color;
+// Style main headings with neon glow
+h1 {
+  @include neon-glow($neon-cyan);
+  font-size: $heading-font-size + 8px;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   @include smooth-transition;
   
   &:hover {
-    color: lighten($accent-color, 15%);
+    @include neon-glow($neon-green);
+    letter-spacing: 3px;
   }
 }
 
-// Style the main content area
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: $spacing-lg;
-  background-color: $dark-bg;
-  color: $light-text;
+// Style secondary headings
+h2 {
+  @include neon-glow($neon-green);
+  font-size: $heading-font-size;
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  letter-spacing: 1px;
+  @include smooth-transition;
+  
+  &:hover {
+    @include neon-glow($neon-cyan);
+  }
 }
 
-// Improve list styling
+// Style other headings
+h3, h4, h5, h6 {
+  @include neon-glow($neon-blue);
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
+  letter-spacing: 1px;
+  @include smooth-transition;
+  
+  &:hover {
+    @include neon-glow($neon-cyan);
+  }
+}
+
+// Style links with neon effect
+a {
+  color: $neon-cyan;
+  text-decoration: none;
+  @include smooth-transition;
+  
+  &:hover {
+    @include neon-glow($neon-cyan);
+    text-decoration: underline;
+  }
+  
+  &:active {
+    color: $neon-pink;
+  }
+}
+
+// Improve list styling with terminal markers
 ul, ol {
   margin-left: $spacing-lg;
   margin-bottom: $spacing-md;
   
   li {
     margin-bottom: $spacing-sm;
-    line-height: 1.6;
+    line-height: 1.8;
+    color: $light-text;
+    
+    // Add custom list markers with neon color
+    &::before {
+      color: $neon-green;
+    }
   }
 }
 
-// Style code blocks for better readability
+// Style code blocks like a terminal
 code {
-  background-color: rgba(110, 118, 129, 0.4);
+  background-color: $darker-bg;
+  color: $neon-green;
   padding: $spacing-xs $spacing-sm;
   border-radius: 3px;
   font-size: $small-font-size;
-  color: $success-color;
+  font-family: $mono-font;
+  @include terminal-border($neon-green);
+  @include smooth-transition;
+  
+  &:hover {
+    @include neon-glow($neon-green);
+  }
 }
 
-// Style blockquotes nicely
+// Style pre (code blocks) with full terminal look
+pre {
+  background-color: $darker-bg !important;
+  border-left: 3px solid $neon-green;
+  padding: $spacing-md !important;
+  border-radius: 4px !important;
+  color: $neon-green !important;
+  @include subtle-glow($neon-green);
+  margin: $spacing-lg 0 !important;
+  
+  code {
+    color: $neon-green !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    text-shadow: 0 0 10px $neon-green;
+  }
+}
+
+// Style blockquotes like terminal output
 blockquote {
-  border-left: 4px solid $accent-color;
+  border-left: 4px solid $neon-pink;
   margin-left: 0;
   padding-left: $spacing-md;
-  color: lighten($light-text, 10%);
+  color: $neon-pink;
   font-style: italic;
   margin-bottom: $spacing-md;
+  @include smooth-transition;
+  
+  &:hover {
+    border-left-color: $neon-cyan;
+    color: $neon-cyan;
+  }
 }
 
-// Improve table styling if you use tables
+// Style tables with terminal aesthetic
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: $spacing-lg;
+  color: $light-text;
   
   th, td {
     padding: $spacing-md;
@@ -176,34 +250,112 @@ table {
   }
   
   th {
-    background-color: rgba(88, 166, 255, 0.1);
-    color: $accent-color;
+    background-color: rgba($neon-cyan, 0.1);
+    color: $neon-cyan;
     font-weight: 600;
+    border: 1px solid $neon-cyan;
+    @include neon-glow($neon-cyan);
   }
   
   tr:hover {
-    background-color: rgba(88, 166, 255, 0.05);
+    background-color: rgba($neon-cyan, 0.05);
   }
 }
 
-// Style horizontal rules (the --- separators)
+// Style horizontal rules with neon
 hr {
   border: none;
-  border-top: 2px solid $border-color;
+  border-top: 2px dashed $neon-cyan;
   margin: $spacing-xl 0;
+  opacity: 0.7;
 }
 
-// Add subtle shadows and styling to containers
-.container {
-  background-color: rgba(13, 17, 23, 0.5);
+// Create terminal-style containers
+.container, article, section {
+  background-color: rgba($dark-bg, 0.9);
   border: 1px solid $border-color;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: $spacing-lg;
   margin-bottom: $spacing-lg;
   @include smooth-transition;
   
   &:hover {
-    border-color: $accent-color;
-    background-color: rgba(13, 17, 23, 0.8);
+    border-color: $neon-cyan;
+    @include subtle-glow($neon-cyan);
+  }
+}
+
+// Style main content area
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  color: $light-text;
+}
+
+// Add terminal cursor effect to paragraphs
+p {
+  line-height: 1.8;
+  color: $light-text;
+  margin-bottom: $spacing-md;
+  @include smooth-transition;
+  
+  &:first-letter {
+    color: $neon-green;
+  }
+}
+
+// Style strong/bold text with neon
+strong, b {
+  color: $neon-yellow;
+  font-weight: bold;
+}
+
+// Style emphasized text with neon pink
+em, i {
+  color: $neon-pink;
+  font-style: italic;
+}
+
+// Add terminal aesthetic to buttons (if they exist)
+button, .button, .btn {
+  background-color: transparent;
+  color: $neon-cyan;
+  border: 2px solid $neon-cyan;
+  padding: $spacing-sm $spacing-md;
+  border-radius: 3px;
+  cursor: pointer;
+  @include smooth-transition;
+  font-family: $mono-font;
+  
+  &:hover {
+    @include neon-glow($neon-cyan);
+    background-color: rgba($neon-cyan, 0.1);
+    @include subtle-glow($neon-cyan);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Style form inputs with terminal look
+input, textarea, select {
+  background-color: $darker-bg;
+  color: $neon-green;
+  border: 1px solid $neon-green;
+  padding: $spacing-sm;
+  border-radius: 3px;
+  font-family: $mono-font;
+  @include smooth-transition;
+  
+  &:focus {
+    outline: none;
+    @include neon-glow($neon-green);
+    @include subtle-glow($neon-green);
+  }
+  
+  &::placeholder {
+    color: darken($neon-green, 30%);
   }
 }
