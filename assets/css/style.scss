@@ -11,6 +11,7 @@ $terminal-bg: #4e8651;          // Sage green background
 $terminal-darker: #3d6a40;      // Darker green for contrast
 $terminal-lighter: #5a9a5d;     // Lighter green for highlights
 $border-color: #8fb191;         // Light border for definition
+$accent-glow: rgba(169, 205, 46, 0.3);  // Soft glow accent
 
 // Spacing scale
 $spacing-xs: 4px;
@@ -30,24 +31,45 @@ $transition-speed: 0.3s;
 
 
 // ============================================
-// SCSS MIXINS - Terminal Effects
+// SCSS MIXINS - Aesthetic Terminal Effects
 // ============================================
 
-// Subtle text glow
-@mixin text-glow {
+// Subtle, cute text glow - not overwhelming
+@mixin aesthetic-glow {
   color: $terminal-text;
-  text-shadow: 0 0 5px rgba($terminal-text, 0.4);
+  text-shadow: 
+    0 0 8px rgba($terminal-text, 0.3),
+    0 0 16px rgba($terminal-text, 0.15);
 }
 
-// Terminal border effect
-@mixin terminal-border {
-  border: 1px solid $border-color;
-  box-shadow: 0 0 8px rgba($terminal-text, 0.1);
+// Decorative gradient border effect
+@mixin decorative-border {
+  border: none;
+  border-bottom: 2px dashed $border-color;
+  box-shadow: 
+    0 4px 12px rgba($terminal-text, 0.1),
+    inset 0 1px 0 rgba($terminal-text, 0.1);
+}
+
+// Soft shadow for depth without harshness
+@mixin soft-shadow {
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba($terminal-text, 0.08);
 }
 
 // Smooth transitions
 @mixin smooth-transition {
   transition: all $transition-speed ease-in-out;
+}
+
+// Accent box styling
+@mixin accent-box {
+  background: linear-gradient(135deg, 
+    rgba($terminal-text, 0.05) 0%, 
+    rgba($terminal-text, 0.02) 100%);
+  border-left: 3px solid $terminal-text;
+  padding-left: $spacing-md - 3px;
 }
 
 
@@ -59,7 +81,7 @@ $transition-speed: 0.3s;
 
 
 // ============================================
-// GLOBAL STYLING - Override Everything to Terminal Colors
+// GLOBAL STYLING - Aesthetic Terminal Background
 // ============================================
 
 // Force all backgrounds to terminal color
@@ -68,7 +90,7 @@ $transition-speed: 0.3s;
   color: $terminal-text !important;
 }
 
-// Override html and body specifically
+// Override html and body
 html {
   background-color: $terminal-bg !important;
   color: $terminal-text !important;
@@ -119,7 +141,7 @@ border, [class*="border"], hr {
 
 
 // ============================================
-// CUSTOM STYLING - Terminal Aesthetic
+// CUSTOM STYLING - Aesthetic Terminal Design
 // ============================================
 
 // Hide the GitHub View button
@@ -127,9 +149,9 @@ border, [class*="border"], hr {
   display: none !important;
 }
 
-// Main heading style
+// Main heading style with aesthetic glow
 h1 {
-  @include text-glow;
+  @include aesthetic-glow;
   font-size: $heading-font-size + 8px;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
@@ -138,31 +160,48 @@ h1 {
   letter-spacing: 1px;
   @include smooth-transition;
   background-color: $terminal-bg !important;
+  position: relative;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, $terminal-text, transparent);
+    margin-top: $spacing-sm;
+    border-radius: 2px;
+  }
   
   &:hover {
-    text-shadow: 0 0 10px rgba($terminal-text, 0.6);
+    text-shadow: 
+      0 0 12px rgba($terminal-text, 0.4),
+      0 0 24px rgba($terminal-text, 0.2);
     letter-spacing: 2px;
   }
 }
 
-// Secondary headings
+// Secondary headings with aesthetic styling
 h2 {
-  @include text-glow;
+  @include aesthetic-glow;
+  @include accent-box;
   font-size: $heading-font-size;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
   letter-spacing: 1px;
+  padding: $spacing-md;
   @include smooth-transition;
   background-color: $terminal-bg !important;
   
   &:hover {
-    text-shadow: 0 0 10px rgba($terminal-text, 0.6);
+    text-shadow: 
+      0 0 12px rgba($terminal-text, 0.4),
+      0 0 24px rgba($terminal-text, 0.2);
   }
 }
 
 // Other headings
 h3, h4, h5, h6 {
-  @include text-glow;
+  @include aesthetic-glow;
   margin-top: $spacing-md;
   margin-bottom: $spacing-sm;
   letter-spacing: 0.5px;
@@ -170,25 +209,27 @@ h3, h4, h5, h6 {
   background-color: $terminal-bg !important;
 }
 
-// Style all text
+// Style all text with subtle glow
 p {
   color: $terminal-text !important;
   line-height: 1.8;
   margin-bottom: $spacing-md;
   @include smooth-transition;
   background-color: $terminal-bg !important;
+  text-shadow: 0 0 4px rgba($terminal-text, 0.2);
 }
 
-// Style links
+// Style links with cute glow
 a {
   color: $terminal-text !important;
   text-decoration: none;
   @include smooth-transition;
   border-bottom: 1px dotted $border-color;
   background-color: transparent !important;
+  text-shadow: 0 0 6px rgba($terminal-text, 0.2);
   
   &:hover {
-    @include text-glow;
+    @include aesthetic-glow;
     border-bottom: 1px solid $terminal-text;
     padding-bottom: 2px;
   }
@@ -202,7 +243,7 @@ a {
   }
 }
 
-// Style lists
+// Style lists with visual interest
 ul, ol {
   margin-left: $spacing-lg;
   margin-bottom: $spacing-md;
@@ -214,34 +255,38 @@ ul, ol {
     line-height: 1.8;
     color: $terminal-text !important;
     background-color: $terminal-bg !important;
+    text-shadow: 0 0 4px rgba($terminal-text, 0.15);
   }
 }
 
-// Style code blocks
+// Style code blocks with aesthetic treatment
 code {
   background-color: $terminal-darker !important;
   color: $terminal-text !important;
   padding: $spacing-xs $spacing-sm;
-  border-radius: 2px;
+  border-radius: 3px;
   font-size: $small-font-size;
   font-family: $mono-font;
-  @include terminal-border;
+  border: 1px solid $border-color;
+  @include soft-shadow;
   @include smooth-transition;
+  text-shadow: 0 0 5px rgba($terminal-text, 0.2);
   
   &:hover {
-    @include text-glow;
+    @include aesthetic-glow;
   }
 }
 
-// Style pre (code blocks)
+// Style pre (code blocks) with decorative styling
 pre {
   background-color: $terminal-darker !important;
-  border-left: 3px solid $terminal-text;
+  border-left: 4px solid $terminal-text;
   padding: $spacing-md !important;
-  border-radius: 2px !important;
+  border-radius: 4px !important;
   color: $terminal-text !important;
   margin: $spacing-lg 0 !important;
-  @include terminal-border;
+  @include soft-shadow;
+  position: relative;
   
   code {
     color: $terminal-text !important;
@@ -253,55 +298,63 @@ pre {
   }
 }
 
-// Style blockquotes
+// Style blockquotes with accent styling
 blockquote {
-  border-left: 4px solid $terminal-text;
+  @include accent-box;
   margin-left: 0;
-  padding-left: $spacing-md;
   color: $terminal-text !important;
   font-style: italic;
   margin-bottom: $spacing-md;
+  padding: $spacing-md;
   @include smooth-transition;
   background-color: $terminal-bg !important;
+  @include soft-shadow;
   
   &:hover {
-    border-left-width: 6px;
-    padding-left: $spacing-md - 2px;
+    border-left-color: $border-color;
   }
 }
 
-// Style tables
+// Style tables with aesthetic treatment
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: $spacing-lg;
   color: $terminal-text !important;
-  border: 1px solid $border-color !important;
+  border: none !important;
   background-color: $terminal-bg !important;
+  @include soft-shadow;
   
   th, td {
     padding: $spacing-md;
-    border: 1px solid $border-color !important;
+    border-bottom: 1px dashed $border-color;
     text-align: left;
     color: $terminal-text !important;
     background-color: $terminal-bg !important;
   }
   
   th {
-    background-color: rgba($terminal-text, 0.1) !important;
+    background: linear-gradient(135deg, 
+      rgba($terminal-text, 0.08) 0%, 
+      rgba($terminal-text, 0.03) 100%);
     font-weight: 600;
-    @include text-glow;
+    @include aesthetic-glow;
+    border-bottom: 2px solid $border-color;
   }
   
   tr:hover {
-    background-color: rgba($terminal-text, 0.05) !important;
+    background-color: rgba($terminal-text, 0.04) !important;
   }
 }
 
-// Style horizontal rules
+// Style horizontal rules with aesthetic divider
 hr {
   border: none !important;
-  border-top: 1px dashed $border-color !important;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    $border-color, 
+    transparent);
   margin: $spacing-xl 0 !important;
   opacity: 0.6;
 }
@@ -312,15 +365,20 @@ hr {
   border-color: $border-color !important;
 }
 
-// Style containers and sections
+// Style containers and sections with soft styling
 .container, article, section, .content, [class*="content"] {
   background-color: $terminal-bg !important;
   color: $terminal-text !important;
-  border-color: $border-color !important;
+  border-color: transparent !important;
+  @include soft-shadow;
+  border-radius: 4px;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
   
   &:hover {
-    border-color: $terminal-text;
-    box-shadow: 0 0 12px rgba($terminal-text, 0.2);
+    box-shadow: 
+      0 6px 20px rgba(0, 0, 0, 0.2),
+      0 0 30px rgba($terminal-text, 0.12);
   }
 }
 
@@ -338,6 +396,7 @@ strong, b {
   color: $terminal-text !important;
   font-weight: bold;
   background-color: $terminal-bg !important;
+  text-shadow: 0 0 8px rgba($terminal-text, 0.25);
 }
 
 // Style emphasized text
@@ -347,22 +406,23 @@ em, i {
   background-color: $terminal-bg !important;
 }
 
-// Style buttons
+// Style buttons with cute aesthetic
 button, .button, .btn, [class*="button"] {
   background-color: transparent !important;
   color: $terminal-text !important;
   border: 1px solid $terminal-text !important;
   padding: $spacing-sm $spacing-md;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   @include smooth-transition;
   font-family: $mono-font;
   font-size: $base-font-size;
+  text-shadow: 0 0 4px rgba($terminal-text, 0.2);
   
   &:hover {
-    @include text-glow;
+    @include aesthetic-glow;
     border-color: $terminal-text;
-    box-shadow: 0 0 10px rgba($terminal-text, 0.3);
+    @include soft-shadow;
   }
   
   &:active {
@@ -370,22 +430,23 @@ button, .button, .btn, [class*="button"] {
   }
 }
 
-// Style form inputs
+// Style form inputs with aesthetic treatment
 input, textarea, select, [class*="input"], [class*="form"] {
   background-color: $terminal-darker !important;
   color: $terminal-text !important;
   border: 1px solid $border-color !important;
   padding: $spacing-sm;
-  border-radius: 2px;
+  border-radius: 4px;
   font-family: $mono-font;
   font-size: $base-font-size;
   @include smooth-transition;
+  text-shadow: 0 0 3px rgba($terminal-text, 0.2);
   
   &:focus {
     outline: none !important;
-    @include text-glow;
+    @include aesthetic-glow;
     border-color: $terminal-text !important;
-    box-shadow: 0 0 8px rgba($terminal-text, 0.3);
+    @include soft-shadow;
   }
   
   &::placeholder {
