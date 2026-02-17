@@ -2,20 +2,15 @@
 ---
 
 // ============================================
-// SCSS VARIABLES - Hacker Terminal Theme
+// SCSS VARIABLES - Retro Green Terminal Theme
 // ============================================
 
-// Neon color palette - vibrant colors for that hacker aesthetic
-$neon-cyan: #00ffff;            // Bright cyan - main accent
-$neon-green: #00ff00;           // Bright green - secondary accent
-$neon-pink: #ff00ff;            // Magenta/Pink - highlights
-$neon-yellow: #ffff00;          // Yellow - alerts
-$neon-blue: #0088ff;            // Electric blue
-
-$dark-bg: #0a0e27;              // Very dark blue/black background
-$darker-bg: #050811;            // Even darker for contrast
-$light-text: #e0e0e0;           // Light gray text
-$border-color: #1a1f3a;         // Subtle dark border
+// Classic retro terminal colors - single accent color for elegance
+$terminal-green: #00ff00;       // Bright retro green - main color
+$terminal-dark: #001a00;        // Very dark green-black background
+$terminal-darker: #000000;      // Pure black for deepest background
+$light-text: #00ff00;           // Green text for all content
+$border-green: #00cc00;         // Slightly darker green for borders
 
 // Spacing scale
 $spacing-xs: 4px;
@@ -28,49 +23,43 @@ $spacing-xl: 32px;
 $base-font-size: 16px;
 $heading-font-size: 24px;
 $small-font-size: 14px;
-$mono-font: 'Courier New', monospace;
+$mono-font: 'Courier New', 'Courier', monospace;
 
 // Effects
 $transition-speed: 0.3s;
-$glow-blur: 10px;
 
 
 // ============================================
-// SCSS MIXINS - Terminal Effects
+// SCSS MIXINS - Retro Terminal Effects
 // ============================================
 
-// Neon glow effect
-@mixin neon-glow($color) {
-  color: $color;
-  text-shadow: 0 0 5px $color, 0 0 10px $color, 0 0 20px $color;
+// Subtle scan line effect (retro CRT monitor look)
+@mixin scanlines {
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
 }
 
-// Subtle glow for backgrounds
-@mixin subtle-glow($color) {
-  box-shadow: 0 0 15px rgba($color, 0.3), inset 0 0 15px rgba($color, 0.05);
-}
-
-// Smooth transition for all properties
-@mixin smooth-transition {
-  transition: all $transition-speed ease-in-out;
+// Green text glow (subtle, not overwhelming)
+@mixin green-glow {
+  color: $terminal-green;
+  text-shadow: 0 0 10px rgba($terminal-green, 0.5);
 }
 
 // Terminal border effect
-@mixin terminal-border($color) {
-  border: 2px solid $color;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba($color, 0.3);
+@mixin terminal-border {
+  border: 1px solid $border-green;
+  box-shadow: 0 0 8px rgba($terminal-green, 0.2);
 }
 
-// Hover glow effect
-@mixin hover-glow($color) {
-  @include smooth-transition;
-  
-  &:hover {
-    @include neon-glow($color);
-    @include subtle-glow($color);
-    transform: translateY(-2px);
-  }
+// Smooth transitions
+@mixin smooth-transition {
+  transition: all $transition-speed ease-in-out;
 }
 
 
@@ -82,24 +71,25 @@ $glow-blur: 10px;
 
 
 // ============================================
-// GLOBAL STYLING - Dark Terminal Background
+// GLOBAL STYLING - Retro Terminal Background
 // ============================================
 
-// Make the entire page dark terminal style
-body {
-  background-color: $dark-bg !important;
-  color: $light-text;
+// Set dark retro terminal background for entire page
+html, body {
+  background-color: $terminal-darker !important;
+  color: $terminal-green;
   font-family: $mono-font;
+  @include scanlines;
 }
 
-// Set page background
-html {
-  background-color: $darker-bg !important;
+body {
+  background-color: $terminal-dark !important;
+  @include scanlines;
 }
 
 
 // ============================================
-// CUSTOM STYLING - Hacker Terminal Aesthetic
+// CUSTOM STYLING - Classic Terminal Aesthetic
 // ============================================
 
 // Hide the GitHub View button
@@ -107,26 +97,26 @@ html {
   display: none !important;
 }
 
-// Style main headings with neon glow
+// Main heading style
 h1 {
-  @include neon-glow($neon-cyan);
+  @include green-glow;
   font-size: $heading-font-size + 8px;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   @include smooth-transition;
   
   &:hover {
-    @include neon-glow($neon-green);
-    letter-spacing: 3px;
+    text-shadow: 0 0 15px rgba($terminal-green, 0.8);
+    letter-spacing: 2px;
   }
 }
 
-// Style secondary headings
+// Secondary headings
 h2 {
-  @include neon-glow($neon-green);
+  @include green-glow;
   font-size: $heading-font-size;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
@@ -134,154 +124,158 @@ h2 {
   @include smooth-transition;
   
   &:hover {
-    @include neon-glow($neon-cyan);
+    text-shadow: 0 0 15px rgba($terminal-green, 0.8);
   }
 }
 
-// Style other headings
+// Other headings
 h3, h4, h5, h6 {
-  @include neon-glow($neon-blue);
-  margin-top: $spacing-lg;
-  margin-bottom: $spacing-md;
-  letter-spacing: 1px;
+  @include green-glow;
+  margin-top: $spacing-md;
+  margin-bottom: $spacing-sm;
+  letter-spacing: 0.5px;
   @include smooth-transition;
-  
-  &:hover {
-    @include neon-glow($neon-cyan);
-  }
 }
 
-// Style links with neon effect
+// Style all text with terminal green
+p {
+  color: $terminal-green;
+  line-height: 1.8;
+  margin-bottom: $spacing-md;
+  @include smooth-transition;
+}
+
+// Style links
 a {
-  color: $neon-cyan;
+  color: $terminal-green;
   text-decoration: none;
   @include smooth-transition;
+  border-bottom: 1px dotted $border-green;
   
   &:hover {
-    @include neon-glow($neon-cyan);
-    text-decoration: underline;
+    @include green-glow;
+    border-bottom: 1px solid $terminal-green;
+    padding-bottom: 2px;
   }
   
   &:active {
-    color: $neon-pink;
+    opacity: 0.8;
   }
 }
 
-// Improve list styling with terminal markers
+// Style lists with terminal aesthetics
 ul, ol {
   margin-left: $spacing-lg;
   margin-bottom: $spacing-md;
+  color: $terminal-green;
   
   li {
     margin-bottom: $spacing-sm;
     line-height: 1.8;
-    color: $light-text;
-    
-    // Add custom list markers with neon color
-    &::before {
-      color: $neon-green;
-    }
+    color: $terminal-green;
   }
 }
 
-// Style code blocks like a terminal
+// Style code blocks like a terminal display
 code {
-  background-color: $darker-bg;
-  color: $neon-green;
+  background-color: $terminal-darker;
+  color: $terminal-green;
   padding: $spacing-xs $spacing-sm;
-  border-radius: 3px;
+  border-radius: 2px;
   font-size: $small-font-size;
   font-family: $mono-font;
-  @include terminal-border($neon-green);
+  @include terminal-border;
   @include smooth-transition;
   
   &:hover {
-    @include neon-glow($neon-green);
+    @include green-glow;
   }
 }
 
-// Style pre (code blocks) with full terminal look
+// Style code blocks (pre) with full terminal look
 pre {
-  background-color: $darker-bg !important;
-  border-left: 3px solid $neon-green;
+  background-color: $terminal-darker !important;
+  border-left: 3px solid $terminal-green;
   padding: $spacing-md !important;
-  border-radius: 4px !important;
-  color: $neon-green !important;
-  @include subtle-glow($neon-green);
+  border-radius: 2px !important;
+  color: $terminal-green !important;
   margin: $spacing-lg 0 !important;
+  @include scanlines;
+  @include terminal-border;
   
   code {
-    color: $neon-green !important;
+    color: $terminal-green !important;
     border: none !important;
     box-shadow: none !important;
     background-color: transparent !important;
     padding: 0 !important;
-    text-shadow: 0 0 10px $neon-green;
+    text-shadow: 0 0 5px rgba($terminal-green, 0.5);
   }
 }
 
-// Style blockquotes like terminal output
+// Style blockquotes as terminal output
 blockquote {
-  border-left: 4px solid $neon-pink;
+  border-left: 4px solid $terminal-green;
   margin-left: 0;
   padding-left: $spacing-md;
-  color: $neon-pink;
+  color: $terminal-green;
   font-style: italic;
   margin-bottom: $spacing-md;
   @include smooth-transition;
   
   &:hover {
-    border-left-color: $neon-cyan;
-    color: $neon-cyan;
+    border-left-width: 6px;
+    padding-left: $spacing-md - 2px;
   }
 }
 
-// Style tables with terminal aesthetic
+// Style tables with retro terminal look
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: $spacing-lg;
-  color: $light-text;
+  color: $terminal-green;
+  border: 1px solid $border-green;
   
   th, td {
     padding: $spacing-md;
-    border-bottom: 1px solid $border-color;
+    border: 1px solid $border-green;
     text-align: left;
+    color: $terminal-green;
   }
   
   th {
-    background-color: rgba($neon-cyan, 0.1);
-    color: $neon-cyan;
+    background-color: rgba($terminal-green, 0.1);
     font-weight: 600;
-    border: 1px solid $neon-cyan;
-    @include neon-glow($neon-cyan);
+    @include green-glow;
   }
   
   tr:hover {
-    background-color: rgba($neon-cyan, 0.05);
+    background-color: rgba($terminal-green, 0.05);
   }
 }
 
-// Style horizontal rules with neon
+// Style horizontal rules
 hr {
   border: none;
-  border-top: 2px dashed $neon-cyan;
+  border-top: 1px dashed $border-green;
   margin: $spacing-xl 0;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
-// Create terminal-style containers
+// Style containers and sections
 .container, article, section {
-  background-color: rgba($dark-bg, 0.9);
-  border: 1px solid $border-color;
-  border-radius: 4px;
+  background-color: rgba($terminal-dark, 0.8);
+  border: 1px solid $border-green;
+  border-radius: 2px;
   padding: $spacing-lg;
   margin-bottom: $spacing-lg;
+  @include scanlines;
   @include smooth-transition;
   
   &:hover {
-    border-color: $neon-cyan;
-    @include subtle-glow($neon-cyan);
+    border-color: $terminal-green;
+    box-shadow: 0 0 12px rgba($terminal-green, 0.3);
   }
 }
 
@@ -290,72 +284,65 @@ main {
   max-width: 900px;
   margin: 0 auto;
   padding: $spacing-lg;
-  color: $light-text;
+  color: $terminal-green;
+  background-color: $terminal-dark;
+  @include scanlines;
 }
 
-// Add terminal cursor effect to paragraphs
-p {
-  line-height: 1.8;
-  color: $light-text;
-  margin-bottom: $spacing-md;
-  @include smooth-transition;
-  
-  &:first-letter {
-    color: $neon-green;
-  }
-}
-
-// Style strong/bold text with neon
+// Style strong/bold text
 strong, b {
-  color: $neon-yellow;
+  color: $terminal-green;
   font-weight: bold;
 }
 
-// Style emphasized text with neon pink
+// Style emphasized text
 em, i {
-  color: $neon-pink;
+  color: $terminal-green;
   font-style: italic;
 }
 
-// Add terminal aesthetic to buttons (if they exist)
-button, .button, .btn {
+// Style buttons with retro aesthetic
+button, .button {
   background-color: transparent;
-  color: $neon-cyan;
-  border: 2px solid $neon-cyan;
+  color: $terminal-green;
+  border: 1px solid $terminal-green;
   padding: $spacing-sm $spacing-md;
-  border-radius: 3px;
+  border-radius: 2px;
   cursor: pointer;
   @include smooth-transition;
   font-family: $mono-font;
+  font-size: $base-font-size;
   
   &:hover {
-    @include neon-glow($neon-cyan);
-    background-color: rgba($neon-cyan, 0.1);
-    @include subtle-glow($neon-cyan);
+    @include green-glow;
+    border-color: $terminal-green;
+    box-shadow: 0 0 10px rgba($terminal-green, 0.4);
   }
   
   &:active {
-    transform: scale(0.98);
+    opacity: 0.9;
   }
 }
 
 // Style form inputs with terminal look
 input, textarea, select {
-  background-color: $darker-bg;
-  color: $neon-green;
-  border: 1px solid $neon-green;
+  background-color: $terminal-darker;
+  color: $terminal-green;
+  border: 1px solid $border-green;
   padding: $spacing-sm;
-  border-radius: 3px;
+  border-radius: 2px;
   font-family: $mono-font;
+  font-size: $base-font-size;
   @include smooth-transition;
   
   &:focus {
     outline: none;
-    @include neon-glow($neon-green);
-    @include subtle-glow($neon-green);
+    @include green-glow;
+    border-color: $terminal-green;
+    box-shadow: 0 0 8px rgba($terminal-green, 0.4);
   }
   
   &::placeholder {
-    color: darken($neon-green, 30%);
+    color: rgba($terminal-green, 0.4);
   }
 }
