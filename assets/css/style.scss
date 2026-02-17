@@ -1,6 +1,44 @@
 ---
-# This front-matter tells jekyll to compile this SCSS
+# front-matter so Jekyll compiles SCSS
 ---
+
+@import "{{ site.theme }}";
+
+/* Hide the View on Github button */
+.btn {
+  display: none !important;
+}
+
+/* Typing animation for About Me */
+.typing-container {
+  display: block;
+}
+
+.typing-container span {
+  display: block !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  border-right: 3px solid #0f0 !important;
+  width: 0 !important;
+  animation: typing 2.5s steps(40, end) forwards, blink 0.75s step-end infinite;
+}
+
+/* Stagger each line */
+.typing-container span:nth-child(1) { animation-delay: 0s !important; }
+.typing-container span:nth-child(2) { animation-delay: 2.7s !important; }
+.typing-container span:nth-child(3) { animation-delay: 5.4s !important; }
+.typing-container span:nth-child(4) { animation-delay: 8.1s !important; }
+.typing-container span:nth-child(5) { animation-delay: 10.8s !important; }
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
 
 ---
 ---
@@ -12,32 +50,6 @@
   display: none !important;
 }
 
-// === Typing animation for About Me ===
-.typing {
-  display: inline-block;
-}
 
-.typing span {
-  display: block !important;
-  overflow: hidden !important;
-  white-space: nowrap;
-  border-right: 3px solid #0f0;  // terminal-style cursor
-  width: 0 !important;
-  animation: typing 2.5s steps(40, end) forwards, blink 0.75s step-end infinite;
-}
 
-// Stagger lines so they type one after another
-.typing span:nth-child(1) { animation-delay: 0s; }
-.typing span:nth-child(2) { animation-delay: 3s; }
-.typing span:nth-child(3) { animation-delay: 6s; }
-.typing span:nth-child(4) { animation-delay: 9s; }
-.typing span:nth-child(5) { animation-delay: 12s; }
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
+  
