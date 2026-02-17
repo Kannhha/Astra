@@ -59,18 +59,62 @@ $transition-speed: 0.3s;
 
 
 // ============================================
-// GLOBAL STYLING - Terminal Background
+// GLOBAL STYLING - Override Everything to Terminal Colors
 // ============================================
 
-// Set terminal-style background for entire page
-html, body {
+// Force all backgrounds to terminal color
+* {
   background-color: $terminal-bg !important;
-  color: $terminal-text;
-  font-family: $mono-font;
+  color: $terminal-text !important;
+}
+
+// Override html and body specifically
+html {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
 }
 
 body {
   background-color: $terminal-bg !important;
+  color: $terminal-text !important;
+  font-family: $mono-font;
+}
+
+// Override all wrapper and container elements
+.wrapper, .container, .page-wrapper, [class*="container"], [class*="wrapper"], main, article, section {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
+}
+
+// Override header elements
+header, .header, [class*="header"] {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
+  border-color: $border-color !important;
+}
+
+// Override footer elements
+footer, .footer, [class*="footer"] {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
+  border-color: $border-color !important;
+}
+
+// Override sidebar elements
+sidebar, .sidebar, [class*="sidebar"] {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
+  border-color: $border-color !important;
+}
+
+// Override any dark background colors from theme
+[style*="background-color: #"], [style*="background: #"] {
+  background-color: $terminal-bg !important;
+}
+
+// Override borders to match terminal theme
+border, [class*="border"], hr {
+  border-color: $border-color !important;
 }
 
 
@@ -93,6 +137,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 1px;
   @include smooth-transition;
+  background-color: $terminal-bg !important;
   
   &:hover {
     text-shadow: 0 0 10px rgba($terminal-text, 0.6);
@@ -108,6 +153,7 @@ h2 {
   margin-bottom: $spacing-md;
   letter-spacing: 1px;
   @include smooth-transition;
+  background-color: $terminal-bg !important;
   
   &:hover {
     text-shadow: 0 0 10px rgba($terminal-text, 0.6);
@@ -121,22 +167,25 @@ h3, h4, h5, h6 {
   margin-bottom: $spacing-sm;
   letter-spacing: 0.5px;
   @include smooth-transition;
+  background-color: $terminal-bg !important;
 }
 
 // Style all text
 p {
-  color: $terminal-text;
+  color: $terminal-text !important;
   line-height: 1.8;
   margin-bottom: $spacing-md;
   @include smooth-transition;
+  background-color: $terminal-bg !important;
 }
 
 // Style links
 a {
-  color: $terminal-text;
+  color: $terminal-text !important;
   text-decoration: none;
   @include smooth-transition;
   border-bottom: 1px dotted $border-color;
+  background-color: transparent !important;
   
   &:hover {
     @include text-glow;
@@ -147,25 +196,31 @@ a {
   &:active {
     opacity: 0.9;
   }
+  
+  &:visited {
+    color: $terminal-text !important;
+  }
 }
 
 // Style lists
 ul, ol {
   margin-left: $spacing-lg;
   margin-bottom: $spacing-md;
-  color: $terminal-text;
+  color: $terminal-text !important;
+  background-color: $terminal-bg !important;
   
   li {
     margin-bottom: $spacing-sm;
     line-height: 1.8;
-    color: $terminal-text;
+    color: $terminal-text !important;
+    background-color: $terminal-bg !important;
   }
 }
 
 // Style code blocks
 code {
-  background-color: $terminal-darker;
-  color: $terminal-text;
+  background-color: $terminal-darker !important;
+  color: $terminal-text !important;
   padding: $spacing-xs $spacing-sm;
   border-radius: 2px;
   font-size: $small-font-size;
@@ -203,10 +258,11 @@ blockquote {
   border-left: 4px solid $terminal-text;
   margin-left: 0;
   padding-left: $spacing-md;
-  color: $terminal-text;
+  color: $terminal-text !important;
   font-style: italic;
   margin-bottom: $spacing-md;
   @include smooth-transition;
+  background-color: $terminal-bg !important;
   
   &:hover {
     border-left-width: 6px;
@@ -219,43 +275,48 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: $spacing-lg;
-  color: $terminal-text;
-  border: 1px solid $border-color;
+  color: $terminal-text !important;
+  border: 1px solid $border-color !important;
+  background-color: $terminal-bg !important;
   
   th, td {
     padding: $spacing-md;
-    border: 1px solid $border-color;
+    border: 1px solid $border-color !important;
     text-align: left;
-    color: $terminal-text;
+    color: $terminal-text !important;
+    background-color: $terminal-bg !important;
   }
   
   th {
-    background-color: rgba($terminal-text, 0.1);
+    background-color: rgba($terminal-text, 0.1) !important;
     font-weight: 600;
     @include text-glow;
   }
   
   tr:hover {
-    background-color: rgba($terminal-text, 0.05);
+    background-color: rgba($terminal-text, 0.05) !important;
   }
 }
 
 // Style horizontal rules
 hr {
-  border: none;
-  border-top: 1px dashed $border-color;
-  margin: $spacing-xl 0;
+  border: none !important;
+  border-top: 1px dashed $border-color !important;
+  margin: $spacing-xl 0 !important;
   opacity: 0.6;
 }
 
+// Style dividers and separators
+.divider, [class*="divider"], [class*="separator"] {
+  background-color: $terminal-bg !important;
+  border-color: $border-color !important;
+}
+
 // Style containers and sections
-.container, article, section {
-  background-color: rgba($terminal-lighter, 0.5);
-  border: 1px solid $border-color;
-  border-radius: 2px;
-  padding: $spacing-lg;
-  margin-bottom: $spacing-lg;
-  @include smooth-transition;
+.container, article, section, .content, [class*="content"] {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
+  border-color: $border-color !important;
   
   &:hover {
     border-color: $terminal-text;
@@ -268,27 +329,29 @@ main {
   max-width: 900px;
   margin: 0 auto;
   padding: $spacing-lg;
-  color: $terminal-text;
-  background-color: $terminal-bg;
+  color: $terminal-text !important;
+  background-color: $terminal-bg !important;
 }
 
 // Style strong/bold text
 strong, b {
-  color: $terminal-text;
+  color: $terminal-text !important;
   font-weight: bold;
+  background-color: $terminal-bg !important;
 }
 
 // Style emphasized text
 em, i {
-  color: $terminal-text;
+  color: $terminal-text !important;
   font-style: italic;
+  background-color: $terminal-bg !important;
 }
 
 // Style buttons
-button, .button {
-  background-color: transparent;
-  color: $terminal-text;
-  border: 1px solid $terminal-text;
+button, .button, .btn, [class*="button"] {
+  background-color: transparent !important;
+  color: $terminal-text !important;
+  border: 1px solid $terminal-text !important;
   padding: $spacing-sm $spacing-md;
   border-radius: 2px;
   cursor: pointer;
@@ -308,10 +371,10 @@ button, .button {
 }
 
 // Style form inputs
-input, textarea, select {
-  background-color: $terminal-darker;
-  color: $terminal-text;
-  border: 1px solid $border-color;
+input, textarea, select, [class*="input"], [class*="form"] {
+  background-color: $terminal-darker !important;
+  color: $terminal-text !important;
+  border: 1px solid $border-color !important;
   padding: $spacing-sm;
   border-radius: 2px;
   font-family: $mono-font;
@@ -319,13 +382,19 @@ input, textarea, select {
   @include smooth-transition;
   
   &:focus {
-    outline: none;
+    outline: none !important;
     @include text-glow;
-    border-color: $terminal-text;
+    border-color: $terminal-text !important;
     box-shadow: 0 0 8px rgba($terminal-text, 0.3);
   }
   
   &::placeholder {
-    color: rgba($terminal-text, 0.5);
+    color: rgba($terminal-text, 0.5) !important;
   }
+}
+
+// Fix any remaining theme artifacts
+.page-wrapper, .bg-gray, .bg-white, [class*="bg-"] {
+  background-color: $terminal-bg !important;
+  color: $terminal-text !important;
 }
