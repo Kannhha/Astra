@@ -2,15 +2,15 @@
 ---
 
 // ============================================
-// SCSS VARIABLES - Retro Green Terminal Theme
+// SCSS VARIABLES - Custom Retro Terminal Theme
 // ============================================
 
-// Classic retro terminal colors - single accent color for elegance
-$terminal-green: #00ff00;       // Bright retro green - main color
-$terminal-dark: #001a00;        // Very dark green-black background
-$terminal-darker: #000000;      // Pure black for deepest background
-$light-text: #00ff00;           // Green text for all content
-$border-green: #00cc00;         // Slightly darker green for borders
+// Custom color scheme - yellowish-green on sage green
+$terminal-text: #a9cd2e;        // Yellowish-green text color
+$terminal-bg: #4e8651;          // Sage green background
+$terminal-darker: #3d6a40;      // Darker green for contrast
+$terminal-lighter: #5a9a5d;     // Lighter green for highlights
+$border-color: #8fb191;         // Light border for definition
 
 // Spacing scale
 $spacing-xs: 4px;
@@ -30,31 +30,19 @@ $transition-speed: 0.3s;
 
 
 // ============================================
-// SCSS MIXINS - Retro Terminal Effects
+// SCSS MIXINS - Terminal Effects
 // ============================================
 
-// Subtle scan line effect (retro CRT monitor look)
-@mixin scanlines {
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.15) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-}
-
-// Green text glow (subtle, not overwhelming)
-@mixin green-glow {
-  color: $terminal-green;
-  text-shadow: 0 0 10px rgba($terminal-green, 0.5);
+// Subtle text glow
+@mixin text-glow {
+  color: $terminal-text;
+  text-shadow: 0 0 5px rgba($terminal-text, 0.4);
 }
 
 // Terminal border effect
 @mixin terminal-border {
-  border: 1px solid $border-green;
-  box-shadow: 0 0 8px rgba($terminal-green, 0.2);
+  border: 1px solid $border-color;
+  box-shadow: 0 0 8px rgba($terminal-text, 0.1);
 }
 
 // Smooth transitions
@@ -71,25 +59,23 @@ $transition-speed: 0.3s;
 
 
 // ============================================
-// GLOBAL STYLING - Retro Terminal Background
+// GLOBAL STYLING - Terminal Background
 // ============================================
 
-// Set dark retro terminal background for entire page
+// Set terminal-style background for entire page
 html, body {
-  background-color: $terminal-darker !important;
-  color: $terminal-green;
+  background-color: $terminal-bg !important;
+  color: $terminal-text;
   font-family: $mono-font;
-  @include scanlines;
 }
 
 body {
-  background-color: $terminal-dark !important;
-  @include scanlines;
+  background-color: $terminal-bg !important;
 }
 
 
 // ============================================
-// CUSTOM STYLING - Classic Terminal Aesthetic
+// CUSTOM STYLING - Terminal Aesthetic
 // ============================================
 
 // Hide the GitHub View button
@@ -99,7 +85,7 @@ body {
 
 // Main heading style
 h1 {
-  @include green-glow;
+  @include text-glow;
   font-size: $heading-font-size + 8px;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
@@ -109,14 +95,14 @@ h1 {
   @include smooth-transition;
   
   &:hover {
-    text-shadow: 0 0 15px rgba($terminal-green, 0.8);
+    text-shadow: 0 0 10px rgba($terminal-text, 0.6);
     letter-spacing: 2px;
   }
 }
 
 // Secondary headings
 h2 {
-  @include green-glow;
+  @include text-glow;
   font-size: $heading-font-size;
   margin-top: $spacing-lg;
   margin-bottom: $spacing-md;
@@ -124,22 +110,22 @@ h2 {
   @include smooth-transition;
   
   &:hover {
-    text-shadow: 0 0 15px rgba($terminal-green, 0.8);
+    text-shadow: 0 0 10px rgba($terminal-text, 0.6);
   }
 }
 
 // Other headings
 h3, h4, h5, h6 {
-  @include green-glow;
+  @include text-glow;
   margin-top: $spacing-md;
   margin-bottom: $spacing-sm;
   letter-spacing: 0.5px;
   @include smooth-transition;
 }
 
-// Style all text with terminal green
+// Style all text
 p {
-  color: $terminal-green;
+  color: $terminal-text;
   line-height: 1.8;
   margin-bottom: $spacing-md;
   @include smooth-transition;
@@ -147,39 +133,39 @@ p {
 
 // Style links
 a {
-  color: $terminal-green;
+  color: $terminal-text;
   text-decoration: none;
   @include smooth-transition;
-  border-bottom: 1px dotted $border-green;
+  border-bottom: 1px dotted $border-color;
   
   &:hover {
-    @include green-glow;
-    border-bottom: 1px solid $terminal-green;
+    @include text-glow;
+    border-bottom: 1px solid $terminal-text;
     padding-bottom: 2px;
   }
   
   &:active {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 }
 
-// Style lists with terminal aesthetics
+// Style lists
 ul, ol {
   margin-left: $spacing-lg;
   margin-bottom: $spacing-md;
-  color: $terminal-green;
+  color: $terminal-text;
   
   li {
     margin-bottom: $spacing-sm;
     line-height: 1.8;
-    color: $terminal-green;
+    color: $terminal-text;
   }
 }
 
-// Style code blocks like a terminal display
+// Style code blocks
 code {
   background-color: $terminal-darker;
-  color: $terminal-green;
+  color: $terminal-text;
   padding: $spacing-xs $spacing-sm;
   border-radius: 2px;
   font-size: $small-font-size;
@@ -188,37 +174,36 @@ code {
   @include smooth-transition;
   
   &:hover {
-    @include green-glow;
+    @include text-glow;
   }
 }
 
-// Style code blocks (pre) with full terminal look
+// Style pre (code blocks)
 pre {
   background-color: $terminal-darker !important;
-  border-left: 3px solid $terminal-green;
+  border-left: 3px solid $terminal-text;
   padding: $spacing-md !important;
   border-radius: 2px !important;
-  color: $terminal-green !important;
+  color: $terminal-text !important;
   margin: $spacing-lg 0 !important;
-  @include scanlines;
   @include terminal-border;
   
   code {
-    color: $terminal-green !important;
+    color: $terminal-text !important;
     border: none !important;
     box-shadow: none !important;
     background-color: transparent !important;
     padding: 0 !important;
-    text-shadow: 0 0 5px rgba($terminal-green, 0.5);
+    text-shadow: 0 0 5px rgba($terminal-text, 0.3);
   }
 }
 
-// Style blockquotes as terminal output
+// Style blockquotes
 blockquote {
-  border-left: 4px solid $terminal-green;
+  border-left: 4px solid $terminal-text;
   margin-left: 0;
   padding-left: $spacing-md;
-  color: $terminal-green;
+  color: $terminal-text;
   font-style: italic;
   margin-bottom: $spacing-md;
   @include smooth-transition;
@@ -229,53 +214,52 @@ blockquote {
   }
 }
 
-// Style tables with retro terminal look
+// Style tables
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: $spacing-lg;
-  color: $terminal-green;
-  border: 1px solid $border-green;
+  color: $terminal-text;
+  border: 1px solid $border-color;
   
   th, td {
     padding: $spacing-md;
-    border: 1px solid $border-green;
+    border: 1px solid $border-color;
     text-align: left;
-    color: $terminal-green;
+    color: $terminal-text;
   }
   
   th {
-    background-color: rgba($terminal-green, 0.1);
+    background-color: rgba($terminal-text, 0.1);
     font-weight: 600;
-    @include green-glow;
+    @include text-glow;
   }
   
   tr:hover {
-    background-color: rgba($terminal-green, 0.05);
+    background-color: rgba($terminal-text, 0.05);
   }
 }
 
 // Style horizontal rules
 hr {
   border: none;
-  border-top: 1px dashed $border-green;
+  border-top: 1px dashed $border-color;
   margin: $spacing-xl 0;
   opacity: 0.6;
 }
 
 // Style containers and sections
 .container, article, section {
-  background-color: rgba($terminal-dark, 0.8);
-  border: 1px solid $border-green;
+  background-color: rgba($terminal-lighter, 0.5);
+  border: 1px solid $border-color;
   border-radius: 2px;
   padding: $spacing-lg;
   margin-bottom: $spacing-lg;
-  @include scanlines;
   @include smooth-transition;
   
   &:hover {
-    border-color: $terminal-green;
-    box-shadow: 0 0 12px rgba($terminal-green, 0.3);
+    border-color: $terminal-text;
+    box-shadow: 0 0 12px rgba($terminal-text, 0.2);
   }
 }
 
@@ -284,28 +268,27 @@ main {
   max-width: 900px;
   margin: 0 auto;
   padding: $spacing-lg;
-  color: $terminal-green;
-  background-color: $terminal-dark;
-  @include scanlines;
+  color: $terminal-text;
+  background-color: $terminal-bg;
 }
 
 // Style strong/bold text
 strong, b {
-  color: $terminal-green;
+  color: $terminal-text;
   font-weight: bold;
 }
 
 // Style emphasized text
 em, i {
-  color: $terminal-green;
+  color: $terminal-text;
   font-style: italic;
 }
 
-// Style buttons with retro aesthetic
+// Style buttons
 button, .button {
   background-color: transparent;
-  color: $terminal-green;
-  border: 1px solid $terminal-green;
+  color: $terminal-text;
+  border: 1px solid $terminal-text;
   padding: $spacing-sm $spacing-md;
   border-radius: 2px;
   cursor: pointer;
@@ -314,9 +297,9 @@ button, .button {
   font-size: $base-font-size;
   
   &:hover {
-    @include green-glow;
-    border-color: $terminal-green;
-    box-shadow: 0 0 10px rgba($terminal-green, 0.4);
+    @include text-glow;
+    border-color: $terminal-text;
+    box-shadow: 0 0 10px rgba($terminal-text, 0.3);
   }
   
   &:active {
@@ -324,11 +307,11 @@ button, .button {
   }
 }
 
-// Style form inputs with terminal look
+// Style form inputs
 input, textarea, select {
   background-color: $terminal-darker;
-  color: $terminal-green;
-  border: 1px solid $border-green;
+  color: $terminal-text;
+  border: 1px solid $border-color;
   padding: $spacing-sm;
   border-radius: 2px;
   font-family: $mono-font;
@@ -337,12 +320,12 @@ input, textarea, select {
   
   &:focus {
     outline: none;
-    @include green-glow;
-    border-color: $terminal-green;
-    box-shadow: 0 0 8px rgba($terminal-green, 0.4);
+    @include text-glow;
+    border-color: $terminal-text;
+    box-shadow: 0 0 8px rgba($terminal-text, 0.3);
   }
   
   &::placeholder {
-    color: rgba($terminal-green, 0.4);
+    color: rgba($terminal-text, 0.5);
   }
 }
