@@ -1,1 +1,19 @@
 theme: jekyll-theme-hacker
+
+# Site metadata
+title: Kannhha
+description: Welcome to my personal site
+url: https://kannhha.github.io/Astra
+
+# Theme customization
+author:
+  name: Kannhha
+  
+# Plugins for enhanced functionality
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
