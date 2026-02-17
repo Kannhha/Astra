@@ -38,18 +38,3 @@
 @keyframes blink {
   50% { border-color: transparent; }
 }
-
-
----
----
-
-@import "{{ site.theme }}";
-
-/* Hide the View on Github button */
-.btn {
-  display: none !important;
-}
-
-
-
-  
