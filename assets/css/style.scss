@@ -1,5 +1,5 @@
 ---
-# tells jekyll to compile this SCSS
+# tells Jekyll to compile this SCSS
 ---
 
 @import "{{ site.theme }}";
@@ -18,7 +18,7 @@
   display: block !important;
   overflow: hidden !important;
   white-space: nowrap !important;
-  border-right: 3px solid #0f0 !important;
+  border-right: 3px solid #0f0 !important; // blinking cursor
   width: 0 !important;
   animation: typing 2.5s steps(40, end) forwards, blink 0.75s step-end infinite;
 }
@@ -37,9 +37,4 @@
 
 @keyframes blink {
   50% { border-color: transparent; }
-}
-
-/* Hide the View on Github button */
-.btn {
-  display: none !important;
 }
