@@ -1,4 +1,8 @@
 ---
+# This front-matter tells jekyll to compile this SCSS
+---
+
+---
 ---
 
 @import "{{ site.theme }}";
@@ -14,11 +18,11 @@
 }
 
 .typing span {
-  display: block;
-  overflow: hidden;
+  display: block !important;
+  overflow: hidden !important;
   white-space: nowrap;
   border-right: 3px solid #0f0;  // terminal-style cursor
-  width: 0;
+  width: 0 !important;
   animation: typing 2.5s steps(40, end) forwards, blink 0.75s step-end infinite;
 }
 
