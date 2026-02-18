@@ -1,44 +1,59 @@
-// Typewriter Animation Effect for Terminal-style Text
+// Typewriter Animation Effect - Word by Word with Proper Spacing
 document.addEventListener('DOMContentLoaded', function() {
   
-  // Function to create typewriter effect on an element
-  function typeWriter(element, speed = 50) {
-    const text = element.innerText;
+  // Function to create typewriter effect on an element - word by word
+  function typeWriterWordByWord(element, speed = 100) {
+    const originalText = element.innerText;
+    const words = originalText.split(' ');
     element.innerText = '';
-    let index = 0;
+    let wordIndex = 0;
     
-    function type() {
-      if (index < text.length) {
-        element.innerText += text.charAt(index);
-        index++;
-        setTimeout(type, speed);
+    function typeWord() {
+      if (wordIndex < words.length) {
+        // Add word with space after it (except for last word)
+        if (wordIndex === 0) {
+          element.innerText += words[wordIndex];
+        } else {
+          element.innerText += ' ' + words[wordIndex];
+        }
+        wordIndex++;
+        setTimeout(typeWord, speed);
       }
     }
     
-    type();
+    typeWord();
   }
   
-  // Apply typewriter effect to headings
+  // Apply typewriter effect to headings first
   const headings = document.querySelectorAll('h1, h2, h3');
-  headings.forEach((heading, i) => {
+  let totalDelay = 0;
+  
+  headings.forEach((heading) => {
     setTimeout(() => {
-      typeWriter(heading, 50);
-    }, i * 100);
+      typeWriterWordByWord(heading, 80);
+    }, totalDelay);
+    // Add delay for next element based on word count
+    const wordCount = heading.innerText.split(' ').length;
+    totalDelay += (wordCount * 80) + 300; // Add 300ms buffer between elements
   });
   
   // Apply typewriter effect to paragraphs
   const paragraphs = document.querySelectorAll('p');
-  paragraphs.forEach((para, i) => {
+  paragraphs.forEach((para) => {
     setTimeout(() => {
-      typeWriter(para, 30);
-    }, (headings.length * 100) + (i * 80));
+      typeWriterWordByWord(para, 70);
+    }, totalDelay);
+    const wordCount = para.innerText.split(' ').length;
+    totalDelay += (wordCount * 70) + 300;
   });
   
   // Apply typewriter effect to list items
   const listItems = document.querySelectorAll('li');
-  listItems.forEach((item, i) => {
+  listItems.forEach((item) => {
     setTimeout(() => {
-      typeWriter(item, 30);
-    }, (headings.length * 100) + (paragraphs.length * 80) + (i * 60));
+      typeWriterWordByWord(item, 70);
+    }, totalDelay);
+    const wordCount = item.innerText.split(' ').length;
+    totalDelay += (wordCount * 70) + 200;
   });
 });
