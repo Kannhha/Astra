@@ -20,13 +20,13 @@
 // SCSS VARIABLES - Custom Retro Terminal Theme
 // ============================================
 
-// Custom color scheme - yellowish-green on sage green
-$terminal-text: #a9cd2e;        // Yellowish-green text color
-$terminal-bg: #4e8651;          // Sage green background
-$terminal-darker: #3d6a40;      // Darker green for contrast
-$terminal-lighter: #5a9a5d;     // Lighter green for highlights
-$border-color: #8fb191;         // Light border for definition
-$accent-glow: rgba(169, 205, 46, 0.3);  // Soft glow accent
+// Custom color scheme - classic neon terminal green
+$terminal-text: #3CFF5F;        // Bright neon green text
+$terminal-bg: #081A12;          // Very dark green background
+$terminal-darker: #06150E;      // Slightly darker green panels
+$terminal-lighter: #0E2A1D;     // Slightly lighter green highlights
+$border-color: #1F5C3A;         // Muted green border
+$accent-glow: rgba(60, 255, 95, 0.3);  // Soft neon glow accent
 
 // Spacing scale
 $spacing-xs: 4px;
@@ -53,8 +53,8 @@ $transition-speed: 0.3s;
 @mixin text-glow {
   color: $terminal-text;
   text-shadow: 
-    0 0 8px rgba($terminal-text, 0.3),
-    0 0 16px rgba($terminal-text, 0.15);
+    0 0 8px rgba(60, 255, 95, 0.3),
+    0 0 16px rgba(60, 255, 95, 0.15);
 }
 
 // Terminal border effect
@@ -62,15 +62,15 @@ $transition-speed: 0.3s;
   border: none;
   border-bottom: 2px dashed $border-color;
   box-shadow: 
-    0 4px 12px rgba($terminal-text, 0.1),
-    inset 0 1px 0 rgba($terminal-text, 0.1);
+    0 4px 12px rgba(60, 255, 95, 0.1),
+    inset 0 1px 0 rgba(60, 255, 95, 0.1);
 }
 
 // Soft shadow for depth without harshness
 @mixin soft-shadow {
   box-shadow: 
     0 4px 16px rgba(0, 0, 0, 0.15),
-    0 0 20px rgba($terminal-text, 0.08);
+    0 0 20px rgba(60, 255, 95, 0.08);
 }
 
 // Smooth transitions
@@ -81,8 +81,8 @@ $transition-speed: 0.3s;
 // Accent box styling
 @mixin accent-box {
   background: linear-gradient(135deg, 
-    rgba($terminal-text, 0.05) 0%, 
-    rgba($terminal-text, 0.02) 100%);
+    rgba(60, 255, 95, 0.05) 0%, 
+    rgba(60, 255, 95, 0.02) 100%);
   border-left: 3px solid $terminal-text;
   padding-left: $spacing-md - 3px;
 }
@@ -99,13 +99,11 @@ $transition-speed: 0.3s;
 // GLOBAL STYLING - Terminal Background
 // ============================================
 
-// Force all backgrounds to terminal color
 * {
   background-color: $terminal-bg !important;
   color: $terminal-text !important;
 }
 
-// Override html and body
 html {
   background-color: $terminal-bg !important;
   color: $terminal-text !important;
@@ -116,7 +114,6 @@ body {
   color: $terminal-text !important;
   font-family: $mono-font;
 }
-
 // Override all wrapper and container elements
 .wrapper, .container, .page-wrapper, [class*="container"], [class*="wrapper"], main, article, section {
   background-color: $terminal-bg !important;
