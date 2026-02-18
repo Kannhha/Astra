@@ -8,7 +8,7 @@ url: https://kannhha.github.io
 # Theme customization
 author:
   name: Kannhha
-  
+
 # Plugins for enhanced functionality
 plugins:
   - jekyll-feed
@@ -17,3 +17,7 @@ plugins:
 # Build settings
 markdown: kramdown
 highlighter: rouge
+
+# Custom script loading for typewriter animation
+head_includes:
+  - <script src="/assets/js/script.js"></script>
