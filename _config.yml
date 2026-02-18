@@ -17,7 +17,3 @@ plugins:
 # Build settings
 markdown: kramdown
 highlighter: rouge
-
-# Custom script loading for typewriter animation
-head_includes:
-  - <script src="/assets/js/script.js"></script>
