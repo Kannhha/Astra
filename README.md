@@ -18,7 +18,7 @@ I'm an Andromedian developer who loves to code, draw, play games and DOOM SCROLL
 
 ### My Journey
 
-I started my coding journey with curiosity, determination and some BLACK MAGIC. Every project I work on teaches me something new and how to BREAK MY FRICKING COMPUTER and I'm committed to continuously improving my skills as a developer. I believe in writing clean, maintainable code because I DON'T KNOW HOW TO CODE and i love space
+I started my coding journey with curiosity, determination and some BLACK MAGIC. Every project I work on teaches me something new and how to BREAK MY FRICKING COMPUTER 💀
 
 ---
 
@@ -26,7 +26,7 @@ I started my coding journey with curiosity, determination and some BLACK MAGIC. 
 
 I create gaming content and share my gaming experiences on YouTube. Feel free to check out my channel and subscribe if you enjoy gaming videos! and how to DESTROY LIVES.
 
-**YouTube**: [My Channel](https://youtube.com/channel/UC2JTzygrQ0eto9WTjWYB2gQ?si=AcYpm5ubG4Zvqi7H)
+**YouTube**: [Click me 👨🏼‍💻](https://youtube.com/channel/UC2JTzygrQ0eto9WTjWYB2gQ?si=AcYpm5ubG4Zvqi7H)
 
 ---
 
